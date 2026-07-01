@@ -1,0 +1,104 @@
+<!-- Hero Slider -->
+<app-image-slider></app-image-slider>
+
+<!-- Monthly Favorites -->
+<section class="py-24 bg-gray-50 dark:bg-primary-black transition-colors duration-500">
+  <div class="container mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+      <span class="text-yellow-accent font-extrabold text-sm uppercase tracking-widest font-body">Recomendado</span>
+      <h2 class="text-4xl md:text-5xl font-display font-black text-primary-black dark:text-white-text leading-tight">
+        Nuestros Favoritos del Mes
+      </h2>
+      <p class="text-gray-500 dark:text-gray-400 font-body">
+        Una selección exclusiva de nuestras bebidas y postres artesanales más aclamados por la comunidad.
+      </p>
+    </div>
+
+    <!-- Product Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <app-product-card
+        name="Latte de Temporada"
+        description="Cremoso latte infusionado con jarabe artesanal de temporada y un toque de canela."
+        price="5.50"
+      ></app-product-card>
+
+      <app-product-card
+        name="Pastel de Zanahoria"
+        description="Receta casera ultra húmeda con nueces, especias y nuestro clásico glaseado de queso crema."
+        price="4.75"
+      ></app-product-card>
+
+      <app-product-card
+        name="Café de Origen Único"
+        description="Grano selecto de fincas colombianas cultivadas en altura, con notas cítricas y florales."
+        price="6.00"
+      ></app-product-card>
+    </div>
+
+    <!-- View Menu Call to Action -->
+    <div class="text-center mt-16">
+      <a
+        routerLink="/menu"
+        class="inline-block bg-primary-black dark:bg-white text-white-text dark:text-primary-black font-extrabold py-4 px-10 rounded-xl hover:bg-yellow-accent dark:hover:bg-yellow-accent hover:text-primary-black dark:hover:text-primary-black hover:scale-105 active:scale-95 transition-all duration-300 shadow-md text-base tracking-wide"
+      >
+        Ver Menú Completo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-24 bg-white dark:bg-secondary-gray/10 border-t border-gray-100 dark:border-white/5 transition-colors duration-500">
+  <div class="container mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+      <span class="text-yellow-accent font-extrabold text-sm uppercase tracking-widest font-body">Calidad y Servicio</span>
+      <h2 class="text-4xl md:text-5xl font-display font-black text-primary-black dark:text-white-text leading-tight">
+        ¿Por Qué Elegirnos?
+      </h2>
+      <p class="text-gray-500 dark:text-gray-400 font-body">
+        Nos dedicamos a cuidar cada pequeño detalle para brindarte una experiencia memorable en cada visita.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Card 1 -->
+      <div class="group p-8 bg-gray-50 dark:bg-secondary-gray/20 rounded-3xl border border-gray-100 dark:border-white/5 hover:border-yellow-accent/20 hover:shadow-xl transition-all duration-300 text-center space-y-6">
+        <div class="w-16 h-16 rounded-2xl bg-yellow-accent/10 flex items-center justify-center mx-auto text-yellow-accent group-hover:scale-110 group-hover:bg-yellow-accent group-hover:text-primary-black transition-all duration-500">
+          <i class="fas fa-mug-hot text-3xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-primary-black dark:text-white-text font-display">
+          Café de Calidad Suprema
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400 font-body leading-relaxed text-sm">
+          Seleccionamos cuidadosamente granos de especialidad de origen ético y sostenible de las mejores regiones del mundo.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group p-8 bg-gray-50 dark:bg-secondary-gray/20 rounded-3xl border border-gray-100 dark:border-white/5 hover:border-yellow-accent/20 hover:shadow-xl transition-all duration-300 text-center space-y-6">
+        <div class="w-16 h-16 rounded-2xl bg-yellow-accent/10 flex items-center justify-center mx-auto text-yellow-accent group-hover:scale-110 group-hover:bg-yellow-accent group-hover:text-primary-black transition-all duration-500">
+          <i class="fas fa-cookie-bite text-3xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-primary-black dark:text-white-text font-display">
+          Repostería Fresca Diaria
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400 font-body leading-relaxed text-sm">
+          Nuestros panaderos y reposteros elaboran todo a mano y hornean cada mañana para asegurar frescura y sabor incomparables.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group p-8 bg-gray-50 dark:bg-secondary-gray/20 rounded-3xl border border-gray-100 dark:border-white/5 hover:border-yellow-accent/20 hover:shadow-xl transition-all duration-300 text-center space-y-6">
+        <div class="w-16 h-16 rounded-2xl bg-yellow-accent/10 flex items-center justify-center mx-auto text-yellow-accent group-hover:scale-110 group-hover:bg-yellow-accent group-hover:text-primary-black transition-all duration-500">
+          <i class="fas fa-heart text-3xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-primary-black dark:text-white-text font-display">
+          Ambiente Acogedor
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400 font-body leading-relaxed text-sm">
+          Un refugio de diseño moderno y acogedor, perfecto tanto para concentrarte en tu trabajo como para charlar con amigos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

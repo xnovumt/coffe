@@ -1,0 +1,35 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Taza de café -->
+  <g transform="translate(200, 80)">
+    <!-- Cuerpo principal de la taza -->
+    <ellipse cx="0" cy="50" rx="85" ry="45" fill="none" stroke="black" stroke-width="5"/>
+
+    <!-- Parte superior de la taza (interior transparente para invert limpio) -->
+    <ellipse cx="0" cy="50" rx="85" ry="45" fill="none"/>
+    <ellipse cx="0" cy="45" rx="85" ry="45" fill="none" stroke="black" stroke-width="5"/>
+
+    <!-- Borde superior interior -->
+    <ellipse cx="0" cy="45" rx="75" ry="38" fill="none" stroke="black" stroke-width="3"/>
+
+    <!-- Superficie del café (espiral) -->
+    <g transform="translate(0, 45)">
+      <ellipse cx="0" cy="0" rx="65" ry="32" fill="none" stroke="black" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="45" ry="23" fill="none" stroke="black" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="25" ry="13" fill="none" stroke="black" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="12" ry="6" fill="none" stroke="black" stroke-width="3"/>
+    </g>
+
+    <!-- Asa de la taza -->
+    <path d="M 85 35 Q 115 35 115 55 Q 115 75 85 75" fill="none" stroke="black" stroke-width="5"/>
+    <path d="M 85 40 Q 105 40 105 55 Q 105 70 85 70" fill="none" stroke="black" stroke-width="3"/>
+  </g>
+
+  <!-- Texto COLOQUIAL -->
+  <text x="200" y="220" font-family="serif" font-size="42" font-weight="bold" text-anchor="middle" fill="black" letter-spacing="2px">COLOQUIAL</text>
+
+  <!-- Línea divisoria -->
+  <line x1="120" y1="240" x2="280" y2="240" stroke="black" stroke-width="2"/>
+
+  <!-- Texto CAFÉ DE EXPERIENCIA -->
+  <text x="200" y="265" font-family="serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black" letter-spacing="4px">CAFÉ DE EXPERIENCIA</text>
+</svg>

@@ -1,0 +1,27 @@
+<div class="group relative bg-white dark:bg-secondary-gray/30 backdrop-blur-md p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between overflow-hidden">
+  <!-- Interactive background light glow effect -->
+  <div class="absolute -top-10 -right-10 w-24 h-24 bg-yellow-accent/10 dark:bg-yellow-accent/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+  
+  <div class="relative z-10 flex-grow">
+    <h3 class="text-xl font-bold font-display text-primary-black dark:text-white-text mb-2 group-hover:text-yellow-accent transition-colors duration-300">
+      {{ name() }}
+    </h3>
+    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 leading-relaxed font-body">
+      {{ description() }}
+    </p>
+  </div>
+  
+  <div class="relative z-10 flex items-center justify-between mt-auto">
+    <span class="text-2xl font-black text-yellow-accent font-display">
+      ${{ price() }}
+    </span>
+    <button
+      type="button"
+      (click)="add()"
+      [attr.aria-label]="'Añadir ' + name() + ' al pedido'"
+      class="w-11 h-11 rounded-full bg-primary-black dark:bg-white/10 text-white-text dark:text-white hover:bg-yellow-accent dark:hover:bg-yellow-accent hover:text-primary-black dark:hover:text-primary-black active:scale-90 flex items-center justify-center transition-all duration-300 shadow"
+    >
+      <i class="fas fa-plus text-xs" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>

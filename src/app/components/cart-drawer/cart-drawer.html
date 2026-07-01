@@ -1,0 +1,108 @@
+<!-- Overlay: faded + inert when closed so it's invisible and out of the tab order -->
+<div
+  class="fixed inset-0 z-[60] transition-opacity duration-300"
+  [class.opacity-100]="cart.isOpen()"
+  [class.opacity-0]="!cart.isOpen()"
+  [attr.inert]="cart.isOpen() ? null : ''"
+>
+  <!-- Scrim -->
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" (click)="cart.close()"></div>
+
+  <!-- Panel -->
+  <aside
+    class="absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-primary-black shadow-2xl flex flex-col transition-transform duration-300 ease-out"
+    [class.translate-x-0]="cart.isOpen()"
+    [class.translate-x-full]="!cart.isOpen()"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Carrito de pedido"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-white/10">
+      <h2 class="text-xl font-display font-bold text-primary-black dark:text-white-text">
+        Tu Pedido
+        @if (cart.count() > 0) {
+          <span class="text-sm font-body font-normal text-gray-500">({{ cart.count() }})</span>
+        }
+      </h2>
+      <button
+        (click)="cart.close()"
+        aria-label="Cerrar carrito"
+        class="w-10 h-10 flex items-center justify-center rounded-lg text-primary-black dark:text-white-text hover:text-yellow-accent transition-colors"
+      >
+        <i class="fas fa-xmark text-xl"></i>
+      </button>
+    </div>
+
+    @if (cart.items().length === 0) {
+      <!-- Empty state -->
+      <div class="flex-grow flex flex-col items-center justify-center text-center p-6 space-y-4">
+        <i class="fas fa-mug-hot text-5xl text-yellow-accent/40"></i>
+        <p class="text-gray-500 dark:text-gray-400 font-body">Tu carrito está vacío.</p>
+        <a routerLink="/menu" (click)="cart.close()" class="text-yellow-accent font-semibold hover:underline">
+          Ver el menú
+        </a>
+      </div>
+    } @else {
+      <!-- Items -->
+      <div class="flex-grow overflow-y-auto p-6 space-y-5">
+        @for (item of cart.items(); track item.name) {
+          <div class="flex items-center gap-4">
+            <div class="flex-grow min-w-0">
+              <p class="font-semibold text-primary-black dark:text-white-text truncate font-body">{{ item.name }}</p>
+              <p class="text-sm font-bold text-yellow-accent">${{ item.price.toFixed(2) }}</p>
+            </div>
+
+            <!-- Quantity stepper -->
+            <div class="flex items-center gap-2 shrink-0">
+              <button
+                (click)="cart.setQty(item.name, item.qty - 1)"
+                [attr.aria-label]="'Quitar uno de ' + item.name"
+                class="w-9 h-9 rounded-full border border-gray-300 dark:border-white/15 text-primary-black dark:text-white-text hover:bg-yellow-accent hover:text-primary-black hover:border-yellow-accent transition-colors flex items-center justify-center"
+              >
+                <i class="fas fa-minus text-xs"></i>
+              </button>
+              <span class="w-6 text-center font-semibold text-primary-black dark:text-white-text tabular-nums">{{ item.qty }}</span>
+              <button
+                (click)="cart.setQty(item.name, item.qty + 1)"
+                [attr.aria-label]="'Agregar uno de ' + item.name"
+                class="w-9 h-9 rounded-full border border-gray-300 dark:border-white/15 text-primary-black dark:text-white-text hover:bg-yellow-accent hover:text-primary-black hover:border-yellow-accent transition-colors flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-xs"></i>
+              </button>
+            </div>
+
+            <button
+              (click)="cart.remove(item.name)"
+              [attr.aria-label]="'Eliminar ' + item.name"
+              class="w-9 h-9 shrink-0 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors"
+            >
+              <i class="fas fa-trash-can text-sm"></i>
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- Footer: total + checkout -->
+      <div class="p-6 border-t border-gray-200 dark:border-white/10 space-y-4">
+        <div class="flex justify-between items-center text-lg">
+          <span class="font-semibold text-primary-black dark:text-white-text">Total</span>
+          <span class="font-black text-2xl text-yellow-accent font-display tabular-nums">${{ cart.total().toFixed(2) }}</span>
+        </div>
+        <button
+          (click)="cart.checkoutWhatsApp()"
+          class="w-full bg-yellow-accent text-primary-black font-extrabold py-4 rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-transform shadow-md"
+        >
+          <i class="fab fa-whatsapp text-xl"></i>
+          <span>Pedir por WhatsApp</span>
+        </button>
+        <button
+          (click)="cart.clear()"
+          class="w-full text-sm text-gray-500 hover:text-red-500 transition-colors font-body"
+        >
+          Vaciar carrito
+        </button>
+      </div>
+    }
+  </aside>
+</div>

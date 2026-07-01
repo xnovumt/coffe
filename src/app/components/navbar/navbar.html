@@ -1,0 +1,103 @@
+<header class="sticky top-0 z-50 backdrop-blur-md bg-white/85 dark:bg-primary-black/85 text-primary-black dark:text-white-text border-b border-gray-200/50 dark:border-white/10 shadow-sm transition-all duration-300">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Brand Logo -->
+    <a routerLink="/" (click)="closeMenu()" class="flex items-center space-x-3 group">
+      <div class="w-10 h-10 rounded-full bg-yellow-accent flex items-center justify-center shadow-md transform group-hover:rotate-12 transition-transform duration-300">
+        <img src="/coloquial_mark.svg" alt="" class="w-6 h-6 object-contain" />
+      </div>
+      <span class="text-2xl md:text-3xl font-display font-black tracking-wider group-hover:text-yellow-accent transition-colors duration-300">
+        Coloquial
+      </span>
+    </a>
+
+    <!-- Nav Links & Actions -->
+    <div class="flex items-center space-x-8">
+      <div class="hidden md:flex items-center space-x-2">
+        <a routerLink="/" routerLinkActive="text-yellow-accent font-semibold" [routerLinkActiveOptions]="{exact: true}" class="relative px-3 py-2 text-sm font-medium tracking-wide hover:text-yellow-accent transition-colors duration-300 group">
+          Inicio
+          <span class="absolute bottom-0 left-3 right-3 h-[2px] bg-yellow-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+        <a routerLink="/menu" routerLinkActive="text-yellow-accent font-semibold" class="relative px-3 py-2 text-sm font-medium tracking-wide hover:text-yellow-accent transition-colors duration-300 group">
+          Menú
+          <span class="absolute bottom-0 left-3 right-3 h-[2px] bg-yellow-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+        <a routerLink="/about" routerLinkActive="text-yellow-accent font-semibold" class="relative px-3 py-2 text-sm font-medium tracking-wide hover:text-yellow-accent transition-colors duration-300 group">
+          Nosotros
+          <span class="absolute bottom-0 left-3 right-3 h-[2px] bg-yellow-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+        <a routerLink="/contact" routerLinkActive="text-yellow-accent font-semibold" class="relative px-3 py-2 text-sm font-medium tracking-wide hover:text-yellow-accent transition-colors duration-300 group">
+          Contacto
+          <span class="absolute bottom-0 left-3 right-3 h-[2px] bg-yellow-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+      </div>
+
+      <!-- Theme Toggle & Action -->
+      <div class="flex items-center space-x-4">
+        <!-- Cart -->
+        <button
+          (click)="cart.open()"
+          class="relative w-11 h-11 flex items-center justify-center rounded-lg hover:text-yellow-accent transition-colors duration-300"
+          [attr.aria-label]="'Abrir carrito, ' + cart.count() + ' artículos'"
+        >
+          <i class="fas fa-mug-hot text-lg"></i>
+          @if (cart.count() > 0) {
+            <span class="absolute top-1 right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-yellow-accent text-primary-black text-[11px] font-bold flex items-center justify-center leading-none">
+              {{ cart.count() }}
+            </span>
+          }
+        </button>
+
+        <!-- Toggle Switch -->
+        <button
+          (click)="themeService.toggle()"
+          class="relative w-12 h-6 rounded-full bg-gray-200 dark:bg-secondary-gray p-1 transition-colors duration-300 shadow-inner"
+          [attr.aria-label]="themeService.isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+        >
+          <div
+            class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white dark:bg-yellow-accent flex items-center justify-center shadow-md transform transition-transform duration-300"
+            [class.translate-x-6]="themeService.isDark()"
+          >
+            @if (themeService.isDark()) {
+              <i class="fas fa-moon text-[10px] text-primary-black"></i>
+            } @else {
+              <i class="fas fa-sun text-[10px] text-yellow-accent"></i>
+            }
+          </div>
+        </button>
+
+        <!-- Social Icons for Premium Look -->
+        <div class="hidden lg:flex items-center space-x-3 border-l border-gray-200 dark:border-white/10 pl-4">
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram" class="text-gray-500 hover:text-yellow-accent transition-colors duration-300">
+            <i class="fab fa-instagram text-lg" aria-hidden="true"></i>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Facebook" class="text-gray-500 hover:text-yellow-accent transition-colors duration-300">
+            <i class="fab fa-facebook text-lg" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- Mobile hamburger (hidden on desktop) -->
+        <button
+          (click)="toggleMenu()"
+          class="md:hidden w-11 h-11 -mr-2 flex items-center justify-center rounded-lg hover:text-yellow-accent transition-colors duration-300"
+          [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+          [attr.aria-expanded]="menuOpen()"
+          aria-controls="mobile-menu"
+        >
+          <i class="fas text-xl" [class.fa-bars]="!menuOpen()" [class.fa-xmark]="menuOpen()"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu panel -->
+  @if (menuOpen()) {
+    <div id="mobile-menu" class="md:hidden border-t border-gray-200/50 dark:border-white/10 bg-white/95 dark:bg-primary-black/95 backdrop-blur-md">
+      <nav class="container mx-auto px-6 py-3 flex flex-col">
+        <a routerLink="/" (click)="closeMenu()" routerLinkActive="text-yellow-accent" [routerLinkActiveOptions]="{exact: true}" class="py-3 text-base font-medium border-b border-gray-100 dark:border-white/5 hover:text-yellow-accent transition-colors">Inicio</a>
+        <a routerLink="/menu" (click)="closeMenu()" routerLinkActive="text-yellow-accent" class="py-3 text-base font-medium border-b border-gray-100 dark:border-white/5 hover:text-yellow-accent transition-colors">Menú</a>
+        <a routerLink="/about" (click)="closeMenu()" routerLinkActive="text-yellow-accent" class="py-3 text-base font-medium border-b border-gray-100 dark:border-white/5 hover:text-yellow-accent transition-colors">Nosotros</a>
+        <a routerLink="/contact" (click)="closeMenu()" routerLinkActive="text-yellow-accent" class="py-3 text-base font-medium hover:text-yellow-accent transition-colors">Contacto</a>
+      </nav>
+    </div>
+  }
+</header>

@@ -1,0 +1,16 @@
+<svg viewBox="113 78 204 99" xmlns="http://www.w3.org/2000/svg">
+  <!-- Solo la taza, recortada para usarse como ícono de marca -->
+  <g transform="translate(200, 80)" fill="none" stroke="black">
+    <ellipse cx="0" cy="50" rx="85" ry="45" stroke-width="5"/>
+    <ellipse cx="0" cy="45" rx="85" ry="45" stroke-width="5"/>
+    <ellipse cx="0" cy="45" rx="75" ry="38" stroke-width="3"/>
+    <g transform="translate(0, 45)">
+      <ellipse cx="0" cy="0" rx="65" ry="32" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="45" ry="23" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="25" ry="13" stroke-width="4"/>
+      <ellipse cx="0" cy="0" rx="12" ry="6" stroke-width="3"/>
+    </g>
+    <path d="M 85 35 Q 115 35 115 55 Q 115 75 85 75" stroke-width="5"/>
+    <path d="M 85 40 Q 105 40 105 55 Q 105 70 85 70" stroke-width="3"/>
+  </g>
+</svg>

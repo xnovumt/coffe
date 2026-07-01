@@ -1,0 +1,73 @@
+<div class="bg-white dark:bg-primary-black transition-colors duration-500 min-h-screen font-body py-12 px-6">
+  <div class="container mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+      <span class="text-yellow-accent font-extrabold text-sm uppercase tracking-widest font-body">Nuestra Carta</span>
+      <h1 class="text-4xl md:text-5xl font-display font-black text-primary-black dark:text-white-text leading-tight">
+        Nuestro Menú Completo
+      </h1>
+      <p class="text-gray-500 dark:text-gray-400 font-body">
+        Explora nuestra selección de cafés cultivados con amor y nuestra repostería horneada fresca cada mañana.
+      </p>
+    </div>
+
+    <!-- Demo Mode / Fallback Indicator -->
+    @if (isDemoMode()) {
+      <div class="max-w-4xl mx-auto mb-10 p-4 bg-yellow-accent/10 border border-yellow-accent/20 rounded-2xl flex items-center justify-between text-yellow-600 dark:text-yellow-400 text-sm font-semibold">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-info-circle text-lg"></i>
+          <span>El servidor del menú está fuera de línea. Cargando menú demostrativo local.</span>
+        </div>
+        <span class="px-2.5 py-1 bg-yellow-accent text-primary-black text-xs font-extrabold rounded-lg uppercase">Demo Mode</span>
+      </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (loading()) {
+      <div class="flex flex-col items-center justify-center py-20 space-y-4">
+        <div class="w-12 h-12 border-4 border-yellow-accent border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-gray-500 dark:text-gray-400 font-medium">Cargando nuestro delicioso menú...</p>
+      </div>
+    } @else if (error() && !menu().length) {
+      <!-- Error State (only shown if not even demo data is present) -->
+      <div class="text-center py-20 space-y-4 max-w-md mx-auto">
+        <div class="text-red-500 text-5xl"><i class="fas fa-exclamation-triangle"></i></div>
+        <p class="text-gray-700 dark:text-gray-300 font-semibold text-lg">{{ error() }}</p>
+        <button
+          (click)="ngOnInit()"
+          class="bg-yellow-accent text-primary-black font-extrabold py-3 px-8 rounded-xl hover:scale-105 active:scale-95 transition-transform"
+        >
+          Reintentar Cargar
+        </button>
+      </div>
+    } @else {
+      <!-- Menu Categories -->
+      <div class="max-w-6xl mx-auto space-y-16">
+        @for (category of categoryNames(); track category) {
+          <section class="space-y-8">
+            <!-- Category Divider -->
+            <div class="flex items-center space-x-4 border-b border-gray-100 dark:border-white/5 pb-4">
+              <span class="w-2.5 h-6 bg-yellow-accent rounded-full"></span>
+              <h2 class="text-2xl md:text-3xl font-bold font-display text-primary-black dark:text-white-text">
+                {{ category }}
+              </h2>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded bg-gray-100 dark:bg-secondary-gray/50 text-gray-400 dark:text-gray-500 font-body">
+                {{ categorizedMenu()[category].length }} ítems
+              </span>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              @for (product of categorizedMenu()[category]; track product.name) {
+                <app-product-card
+                  [name]="product.name"
+                  [description]="product.description"
+                  [price]="product.price"
+                ></app-product-card>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    }
+  </div>
+</div>

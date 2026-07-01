@@ -1,3 +1,110 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import 'tailwindcss';
+
+/* Drive `dark:` utilities from the .dark class (set by ThemeService),
+   not the OS setting. Without this, Tailwind v4 defaults to
+   prefers-color-scheme and the theme toggle does nothing. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Coffee palette — espresso + caramel + cream.
+     Token names kept from the original (primary-black / yellow-accent / …)
+     so existing utility classes re-skin without touching every template.
+     ponytail: legacy names, warm values. */
+  --color-primary-black: #241b14;   /* espresso — dark text & dark surfaces */
+  --color-secondary-gray: #3a2b20;  /* mocha — secondary dark surfaces */
+  --color-light-gray: #e8ddd1;      /* warm light */
+  --color-yellow-accent: #b45309;   /* caramel — AA on cream & white */
+  --color-white-text: #ffffff;
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  /* Warm the neutral ramp so grays read as coffee, not steel. */
+  --color-gray-50:  #faf6f0;
+  --color-gray-100: #f3ece3;
+  --color-gray-200: #e8ddd1;
+  --color-gray-300: #d8c9ba;
+}
+
+:root {
+  --color-yellow: #b45309;          /* caramel — selection & scrollbar */
+  --color-black: #241b14;
+  --color-cream: #fbf7f1;
+
+  --color-background: var(--color-cream);
+  --color-text: var(--color-black);
+}
+
+.dark {
+  --color-background: #17110d;       /* deep espresso near-black */
+  --color-text: #f5efe8;
+  --color-yellow: #e0a458;
+  /* Lighter caramel in dark mode so accent text clears 4.5:1 on espresso.
+     Overriding the @theme var re-colors every *-yellow-accent utility. */
+  --color-yellow-accent: #e0a458;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: color 0.5s ease, background-color 0.5s ease;
+  line-height: 1.6;
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Visible keyboard focus ring (several components used focus:outline-none). */
+:focus-visible {
+  outline: 2px solid var(--color-yellow);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-yellow);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #92400e;
+}
+
+/* Selection Highlight */
+::selection {
+  background-color: var(--color-yellow);
+  color: #241b14;
+}
+
+/* Toast / entrance used by the contact form (was undefined → no-op). */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.4s ease-out both; }
+
+/* Respect users who ask for less motion: kill autoplay/parallax churn. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
