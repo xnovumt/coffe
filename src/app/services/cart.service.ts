@@ -12,7 +12,7 @@ export class CartService {
   private readonly platformId = inject(PLATFORM_ID);
 
   // ponytail: placeholder number from the Contact page — replace with the café's real WhatsApp.
-  private readonly whatsappPhone = '573001234567';
+  private readonly whatsappPhone = '573118332970';
 
   readonly items = signal<CartItem[]>([]);
   readonly isOpen = signal(false);
