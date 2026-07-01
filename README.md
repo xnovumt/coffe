@@ -1,59 +1,78 @@
-# CoffeShopAngular
+# Coloquial ☕ — Café de Especialidad
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.16.
+Sitio web para **Coloquial**, un café de especialidad en San Sebastián de Mariquita (Tolima, Colombia). Construido con **Angular 21** y **Tailwind CSS v4**, con modo claro/oscuro, diseño responsive y un carrito de pedidos que finaliza por WhatsApp.
 
-## Development server
+## ✨ Características
 
-To start a local development server, run:
+- **Diseño responsive** (mobile-first) con navegación de escritorio y menú hamburguesa en móvil.
+- **Modo claro/oscuro** con toggle y persistencia en `localStorage` (respeta la preferencia del sistema en el primer arranque).
+- **Hero / carrusel** con transición crossfade y autoplay (se pausa con `prefers-reduced-motion`).
+- **Menú por categorías** que carga desde una API y, si no hay backend, usa un menú demo local automáticamente.
+- **Carrito de pedidos** con contador, panel lateral, cantidades y **checkout por WhatsApp** (persistente en `localStorage`).
+- **Formulario de contacto** con validación básica.
+- **Accesibilidad**: contraste WCAG AA, foco visible por teclado, `aria-label`s y soporte de movimiento reducido.
 
-```bash
-ng serve
-```
+## 🛠️ Tecnologías
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Angular 21](https://angular.dev) — componentes standalone y **signals**
+- [Tailwind CSS v4](https://tailwindcss.com) — configuración CSS-first en `src/styles.css`
+- TypeScript
+- Fuentes: Playfair Display + Plus Jakarta Sans (Google Fonts)
+- Iconos: Font Awesome (CDN)
 
-## Code scaffolding
+## 📋 Requisitos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Node.js** ≥ 20.19 (recomendado 22.x)
+- **npm**
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 🚀 Instalación y desarrollo
 
 ```bash
-ng build
+npm install
+npm start          # ng serve → http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+El servidor recarga automáticamente al modificar los archivos fuente.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 📦 Build de producción
 
 ```bash
-ng test
+npm run build      # genera dist/coffe_shop_angular
 ```
 
-## Running end-to-end tests
+## ⚙️ Configuración
 
-For end-to-end (e2e) testing, run:
+| Qué | Dónde |
+|-----|-------|
+| Número de WhatsApp del carrito | [`src/app/services/cart.service.ts`](src/app/services/cart.service.ts) → `whatsappPhone` |
+| URL de la API del menú | [`src/app/services/menu.service.ts`](src/app/services/menu.service.ts) → `apiUrl` (por defecto `http://localhost:3000/api/menu`) |
 
-```bash
-ng e2e
+> Si la API del menú no responde, la app carga un **menú demo local** automáticamente (modo demostración), así que corre sin backend.
+
+## 📁 Estructura
+
+```
+src/
+├─ app/
+│  ├─ components/     # navbar, footer, image-slider, product-card, cart-drawer
+│  ├─ pages/          # home, menu, about, contact
+│  ├─ services/       # theme, menu, cart
+│  ├─ app.routes.ts   # rutas
+│  └─ app.ts          # componente raíz
+├─ styles.css         # tema: paleta café, modo oscuro, tokens de Tailwind
+└─ index.html
+public/               # logo (coloquial_logo.svg), favicon
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📜 Scripts
 
-## Additional Resources
+| Comando | Descripción |
+|---------|-------------|
+| `npm start` | Servidor de desarrollo (`ng serve`) |
+| `npm run build` | Compila para producción en `dist/` |
+| `npm run watch` | Build incremental en modo desarrollo |
+| `npm test` | Ejecuta pruebas unitarias (`ng test`) — aún no hay pruebas |
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📄 Licencia
+
+Proyecto privado. Todos los derechos reservados © Coloquial.
